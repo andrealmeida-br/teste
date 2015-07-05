@@ -25,8 +25,8 @@ Foi desenvolvido uma API Rest utilizando o cakePHP com as seguintes funções:
 Foi desenvolvido também uma interface para gerenciar as tarefas através de um cliente desenvolvido com AngularJS.
 
 # Instalação #
-*Para a instalação do sistema da questão 4, sera necessário criar um banco de dados MySQL.
-*Criar uma tabela cujo SQL para criação segue abaixo:
+* Para a instalação do sistema da questão 4, sera necessário criar um banco de dados MySQL.
+* Criar uma tabela cujo SQL para criação segue abaixo:
 ```
 #!sql
 CREATE TABLE IF NOT EXISTS `tarefas` (
@@ -37,7 +37,10 @@ CREATE TABLE IF NOT EXISTS `tarefas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ```
-*Configurar o arquivo de configuração do banco de dados do cakePHP: questao4/servidor/app/Config/database.php
+* Configurar o arquivo de configuração do banco de dados do cakePHP: questao4/servidor/app/Config/database.php
+* Acessar o cliente em "questao4/cliente"
+* Caso o cliente e servirdor não estejam no mesmo local no servidor será necessário alterar o valor da variável pathServidor em questao4/cliente/js/controllers.js
+
 
 # Principais arquivos para avaliação #
 ## Rest API ##

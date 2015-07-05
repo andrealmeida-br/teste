@@ -4,8 +4,11 @@ tarefasControllers.controller('TarefasCtrl', function ($scope, $http) {
 	$scope.tarefas = {};
 	$scope.nova = {};
 	
+	//Deve haver uma barra no final
+	var pathServidor = '../servidor/';
+	
 	var load = function() {
-	    $http.get('../servidor/tarefas.json').
+	    $http.get(pathServidor + 'tarefas.json').
 	    success(function(data) {
 	    	$scope.tarefas = data.tarefas;
 	    });
@@ -17,7 +20,7 @@ tarefasControllers.controller('TarefasCtrl', function ($scope, $http) {
     		$scope.tarefas[i].Tarefa.prioridade = i;
 		}
     	
-    	$http.post('../servidor/tarefas/salvarLote.json', $scope.tarefas)
+    	$http.post(pathServidor + 'tarefas/salvarLote.json', $scope.tarefas)
     	.success(function(data) {
     		load();
     	}).error(function(data, status, headers, config) {
@@ -50,7 +53,7 @@ tarefasControllers.controller('TarefasCtrl', function ($scope, $http) {
     	
     	$scope.tarefas[index].Tarefa.titulo = $scope.editando.titulo;
     	$scope.tarefas[index].Tarefa.descricao = $scope.editando.descricao;
-    	$http.post('../servidor/tarefas/'+idSalvar+'.json', $scope.tarefas[index])
+    	$http.post(pathServidor + 'tarefas/'+idSalvar+'.json', $scope.tarefas[index])
     	.error(function(data, status, headers, config) {
 	     	alert('Erro ao salvar a tarefa! Erro:'+status);
     	});
@@ -64,7 +67,7 @@ tarefasControllers.controller('TarefasCtrl', function ($scope, $http) {
     
     $scope.excluirTarefa = function(index) {
     	var idApagar = $scope.tarefas[index].Tarefa.id;
-    	$http.delete('../servidor/tarefas/'+idApagar+'.json' )
+    	$http.delete(pathServidor + 'tarefas/'+idApagar+'.json' )
     		.error(function(data, status, headers, config) {
 	     	alert('Houve um erro e a tarefa não foi excluída! Erro:'+status);
     	});
