@@ -43,7 +43,5 @@ CREATE TABLE IF NOT EXISTS `tarefas` (
 
 
 # Principais arquivos para avaliação #
-## Rest API ##
 * questao4/servidor/app/Controller/TarefasController.php
-## Cliente API ##
 * questao4/cliente/js/controllers.js
