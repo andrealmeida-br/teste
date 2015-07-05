@@ -1,0 +1,49 @@
+body {
+	background-color: #efefef;
+	color: #444;
+}
+
+ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px 20px;
+}
+
+h2 {
+	margin-top: 0px;
+}
+
+.header {
+	margin: auto;
+	text-align: center;
+}
+
+.nova {
+    margin: 0px 20px 0px 20px;	
+}
+
+#add {
+	float: right;
+}
+
+.panel {
+    border-radius: 0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: box-shadow 0.2s ease-in 0s;
+    margin-bottom: 5px;
+}
+
+.botoes {
+	float: right;
+}
+
+.glyphicon:HOVER {
+	cursor: pointer;
+}
+
+.glyphicon {
+	position: relative;
+	float: right;
+	margin: 0px 5px 0px 5px;
+}

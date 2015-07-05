@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="tarefasApp">
+<head>
+<meta charset="utf-8">
+<title>Tarefas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Le styles -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	media="screen" rel="stylesheet" type="text/css">
+<link href="css/estilo.css" media="screen" rel="stylesheet"
+    type="text/css">
+<!-- Scripts -->
+<!--[if lt IE 9]><script type="text/javascript" src="/sistema/public/js/html5shiv.js"></script><![endif]-->
+<!--[if lt IE 9]><script type="text/javascript" src="/sistema/public/js/respond.min.js"></script><![endif]-->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular.min.js"></script>
+<script type="text/javascript" src="js/sortable.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/controllers.js"></script>
+</head>
+<body ng-controller="TarefasCtrl">
+
+<div class="container-fluid conteudo">
+    <div class="col-xs-6">
+		<div class="row header">
+			<h1>Tarefas</h1>
+		</div>
+	
+	    <div class="panel panel nova">
+	        <div class="panel-body">
+	            <input id="titulo" type="text" ng-model="nova.titulo" class="form-control" placeholder="Título da tarefa"></input>
+	            <textarea ng-model="nova.descricao"  class="form-control" rows="3" placeholder="Descrição da tarefa"></textarea>
+	            <button id="add" ng-click="addTarefa()" class="btn btn-primary">Adicionar</button>
+	        </div>
+	    </div>
+	
+		<ul id="sortable" ui-sortable="sortableOptions" ng-model="tarefas">
+			<li ng-repeat="item in tarefas">
+				<div class="panel">
+					<div class="panel-body">
+                        <div class="botoes" ng-hide="editando.index == $index">
+                          <span ng-click="excluirTarefa($index)" class="glyphicon glyphicon-remove" title="Excluir" aria-hidden="true"></span>
+                          <span ng-click="editarTarefa($index)" class="glyphicon glyphicon-edit" title="Editar" aria-hidden="true"></span>
+                        </div>
+                        <div class="detalhe" ng-hide="editando.index == $index">
+							<h2>{{item.Tarefa.titulo}}</h2>
+							{{item.Tarefa.descricao}}
+						</div>
+                        <div class="editar" ng-show="editando.index == $index">
+                            <input id="titulo" type="text" ng-model="editando.titulo" class="form-control" placeholder="Título da tarefa"></input>
+                            <textarea ng-model="editando.descricao"  class="form-control" rows="3" placeholder="Descrição da tarefa"></textarea>
+                            <button id="add" ng-click="salvarEdicao($index)" class="btn btn-primary">Salvar</button>
+                            <button id="add" ng-click="cancelar($index)" class="btn btn-default">Cancelar</button>
+                        </div>
+					</div>
+				</div>
+			</li>
+		</ul>
+   </div>
+</div>
+	
+Clique e arraste para ordenar.
+</body>
+</html>
