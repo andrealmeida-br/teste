@@ -28,7 +28,8 @@ class TarefasController extends AppController
     	}
     	$this->set(array(
     			'message' => $message,
-    			'_serialize' => array('message')
+    			'tarefa' => $this->Tarefa,
+    			'_serialize' => array('message', 'tarefa')
     	));
     }
     

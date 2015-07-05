@@ -1,26 +1,33 @@
 var tarefasControllers = angular.module('tarefasControllers', []);
 
 tarefasControllers.controller('TarefasCtrl', function ($scope, $http) {
-    $http.get('../servidor/tarefas.json').
-    success(function(data) {
-    	$scope.tarefas = data.tarefas;
-    });
+	$scope.tarefas = {};
+	$scope.nova = {};
+	
+	var load = function() {
+	    $http.get('../servidor/tarefas.json').
+	    success(function(data) {
+	    	$scope.tarefas = data.tarefas;
+	    });
+	}
     
-    $scope.atualizarPrioridades = function() {
+    var sincronizarServidor = function() {
     	var i;
     	for( i=0; i< $scope.tarefas.length; i++ ) {
     		$scope.tarefas[i].Tarefa.prioridade = i;
 		}
     	
     	$http.post('../servidor/tarefas/salvarLote.json', $scope.tarefas)
-    	.error(function(data, status, headers, config) {
+    	.success(function(data) {
+    		load();
+    	}).error(function(data, status, headers, config) {
 	     	alert('Erro ao salvar as tarefas! Erro:'+status);
     	});
     }
     
     $scope.sortableOptions = {
 	    stop: function(e, ui) {
-	    	$scope.atualizarPrioridades();
+	    	sincronizarServidor();
 	    }
     }
     
@@ -28,18 +35,8 @@ tarefasControllers.controller('TarefasCtrl', function ($scope, $http) {
     	var data = {};
     	data.Tarefa = $scope.nova;
     	
-    	/*
-    	 * Comentado porque o atualizarPrioridades
-    	 * também salva
-    	 * 
-    	$http.post('../servidor/tarefas.json', data)
-    	.error(function(data, status, headers, config) {
-	     	alert('Erro ordenar as tarefas! Erro:'+status);
-    	});
-    	*/
-    	
     	$scope.tarefas.unshift( data );
-    	$scope.atualizarPrioridades();
+    	sincronizarServidor();
     	$scope.nova = {};
     }
     
@@ -73,4 +70,6 @@ tarefasControllers.controller('TarefasCtrl', function ($scope, $http) {
     	});
     	$scope.tarefas.splice(index, 1);
     }
+    
+    load();
 });
